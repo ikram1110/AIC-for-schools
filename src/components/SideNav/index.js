@@ -67,13 +67,6 @@ const SideNav = (props) => {
         </Link>
       ),
       getItem(
-        "2-7",
-        null,
-        <Link to={"/master/kelas"} onClick={() => onClickMenu("Kelas")}>
-          Kelas
-        </Link>
-      ),
-      getItem(
         "2-8",
         null,
         <Link to={"/master/jurusan"} onClick={() => onClickMenu("Jurusan")}>
@@ -102,6 +95,13 @@ const SideNav = (props) => {
           onClick={() => onClickMenu("Status Kepegawaian")}
         >
           Status Kepegawaian
+        </Link>
+      ),
+      getItem(
+        "2-7",
+        null,
+        <Link to={"/master/kelas"} onClick={() => onClickMenu("Kelas")}>
+          Kelas
         </Link>
       ),
     ]),

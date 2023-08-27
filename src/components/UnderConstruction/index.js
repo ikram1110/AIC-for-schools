@@ -12,7 +12,7 @@ const UnderConstruction = () => {
       }}
     >
       <i className="ri-paint-brush-line" style={{ fontSize: "100px" }}></i>
-      <h1>UNDER CONSTRUCTION</h1>
+      <h1>SEMENTARA DALAM TAHAM PENGEMBANGAN</h1>
     </div>
   );
 };
