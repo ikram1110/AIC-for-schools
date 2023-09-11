@@ -1,12 +1,12 @@
 const initialState = {
-  key: "global",
-};
+  key: 'global',
+}
 
 export const globalReducer = (state = initialState, action) => {
   switch (action.type) {
     default:
       return {
         ...state,
-      };
+      }
   }
-};
+}

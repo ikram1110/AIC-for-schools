@@ -1,7 +1,7 @@
-import UnderConstruction from "../../components/UnderConstruction";
+import UnderConstruction from '../../components/UnderConstruction'
 
 const Dashboard = () => {
-  return <UnderConstruction />;
-};
+  return <UnderConstruction />
+}
 
-export default Dashboard;
+export default Dashboard

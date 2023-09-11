@@ -1,0 +1,29 @@
+.action-card{
+  display: flex;
+}
+.action-search{
+  width: 200px;
+}
+.action-filter{
+  width: 200px;
+  margin-left: 10px;
+}
+
+.form-with-image{
+  display: flex;
+  justify-content: center;
+}
+.form-with-image .left{
+  flex-grow: 1;
+}
+.form-with-image .right{
+  width: 200px;
+}
+.form-with-image .right .wrap-image{
+  margin-left: 10px;
+  width: 190px;
+  border: 1px solid #d9d9d9;
+  border-radius: 6px;
+  padding: 8px;
+  height: 200px;
+}

@@ -1,49 +1,59 @@
-import { Layout } from "antd";
-import { Fragment, useState } from "react";
-import { Helmet } from "react-helmet-async";
-import MainRouter from "../../routes/MainRouter";
-import SideNav from "../../components/SideNav";
-import HeaderNav from "../../components/HeaderNav";
+import { Breadcrumb, Layout } from 'antd'
+import { Fragment, useState } from 'react'
+import { Helmet } from 'react-helmet-async'
+import { useLocation } from 'react-router-dom'
+import MainRouter from '../../routes/MainRouter'
+import SideNav from '../../components/SideNav'
+import HeaderNav from '../../components/HeaderNav'
+import favicon from '../../assets/images/logo.png'
+import breadCrumbItem from '../../utils/breadcrumb'
 
 const Main = () => {
-  const [header, setHeader] = useState("Dashboard");
-  const [collapsed, setCollapsed] = useState(false);
-  const { Sider, Header, Content, Footer } = Layout;
+  const [collapsed, setCollapsed] = useState(false)
+  const location = useLocation()
+
+  const { Sider, Header, Content, Footer } = Layout
+
+  const path = location.pathname
+  const bIdx = breadCrumbItem.findIndex((x) => x.route === path)
+  const itemCrumb = breadCrumbItem[bIdx].items
 
   return (
     <Fragment>
       <Helmet>
-        <title>Dashboard | AIS for Schools</title>
+        <title>Dashboard | Yayasan Rahmatul Asri</title>
+        <link rel="icon" type="image/png" href={favicon} sizes="16x16" />
       </Helmet>
       <div className="main">
         <Header
           style={{
-            paddingInline: "12px",
-            background: "none",
-            borderBottom: "1px solid #00B96B",
-            position: "fixed",
-            width: "100%",
+            paddingInline: '12px',
+            background: 'none',
+            borderBottom: '1px solid #00B96B',
+            position: 'fixed',
+            width: '100%',
           }}
         >
           <HeaderNav />
         </Header>
-        <Layout style={{ background: "none" }}>
+        <Layout style={{ background: 'none' }}>
           <Sider
             collapsible
             collapsed={collapsed}
             onCollapse={(value) => setCollapsed(value)}
             style={{
-              overflow: "auto",
-              height: "calc(100vh - 110px)",
-              position: "fixed",
+              overflow: 'auto',
+              height: 'calc(100vh - 110px)',
+              position: 'fixed',
               left: 0,
-              top: "64px",
+              top: '64px',
               bottom: 0,
-              background: "none",
+              background: '#00B96B22',
+              borderInlineEnd: '1px solid #00B96B',
             }}
             width={260}
             trigger={
-              <div style={{ background: "#00B96B", color: "#dfdfdf" }}>
+              <div style={{ background: '#00B96B', color: '#dfdfdf' }}>
                 {collapsed ? (
                   <i className="ri-arrow-right-s-line"></i>
                 ) : (
@@ -52,31 +62,31 @@ const Main = () => {
               </div>
             }
           >
-            <SideNav collapsed={collapsed} setHeader={setHeader} />
+            <SideNav collapsed={collapsed} />
           </Sider>
           <Layout
             style={{
-              marginLeft: collapsed ? "80px" : "260px",
-              transition: "all 0.2s",
-              marginTop: "64px",
-              background: "none",
+              marginLeft: collapsed ? '80px' : '260px',
+              transition: 'all 0.2s',
+              marginTop: '64px',
+              background: 'none',
             }}
           >
             <Content
               style={{
-                background: "none",
-                paddingInline: "24px",
-                minHeight: "calc(100vh - 105px)",
+                background: 'none',
+                paddingInline: '24px',
+                minHeight: 'calc(100vh - 105px)',
               }}
             >
-              <h1>{header}</h1>
+              <Breadcrumb items={itemCrumb} style={{ marginBlock: 12 }} />
               <MainRouter />
             </Content>
             <Footer
               style={{
-                background: "none",
-                textAlign: "right",
-                padding: "12px",
+                background: 'none',
+                textAlign: 'right',
+                padding: '12px',
               }}
             >
               Cooked By: binaries.id
@@ -85,7 +95,7 @@ const Main = () => {
         </Layout>
       </div>
     </Fragment>
-  );
-};
+  )
+}
 
-export default Main;
+export default Main

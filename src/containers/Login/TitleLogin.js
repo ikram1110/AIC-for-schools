@@ -1,5 +1,13 @@
-const TitleLogin = () => {
-  return <div style={{ backgroundColor: "#46CB85", height: "100%" }}></div>;
-};
+import { Image } from 'antd'
+import logo from '../../assets/images/logo.png'
 
-export default TitleLogin;
+const TitleLogin = () => {
+  return (
+    <div style={{ backgroundColor: '#46CB85', height: '100%' }}>
+      <Image src={logo} />
+      <h2>YAYASAN RAHMATUL ASRI</h2>
+    </div>
+  )
+}
+
+export default TitleLogin

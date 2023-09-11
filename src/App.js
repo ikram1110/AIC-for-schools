@@ -1,9 +1,11 @@
-import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Helmet, HelmetProvider } from "react-helmet-async";
-import Login from "./containers/Login";
-import PrivateRoutes from "./routes/PrivateRoutes";
-import Main from "./containers/Main";
+import './App.css'
+import './assets/styles/antd.css'
+import './assets/styles/main.css'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Helmet, HelmetProvider } from 'react-helmet-async'
+import Login from './containers/Login'
+import PrivateRoutes from './routes/PrivateRoutes'
+import Main from './containers/Main'
 
 function App() {
   return (
@@ -31,7 +33,7 @@ function App() {
         </Routes>
       </HelmetProvider>
     </BrowserRouter>
-  );
+  )
 }
 
-export default App;
+export default App

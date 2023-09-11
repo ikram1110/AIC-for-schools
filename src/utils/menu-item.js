@@ -4,5 +4,5 @@ export function getItem(key, icon, label, children) {
     icon,
     label,
     children,
-  };
+  }
 }

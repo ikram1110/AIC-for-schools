@@ -19,7 +19,7 @@ const PrivateRoutes = ({ children }) => {
   // ) : (
   //   <Navigate to="/login" />
   // );
-  return children;
-};
+  return children
+}
 
-export default PrivateRoutes;
+export default PrivateRoutes
