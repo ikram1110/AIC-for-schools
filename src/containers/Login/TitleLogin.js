@@ -1,5 +1,5 @@
 import { Image } from 'antd'
-import logo from '../../assets/images/logo.png'
+import logo from 'src/assets/images/logo.png'
 
 const TitleLogin = () => {
   return (

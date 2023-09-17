@@ -1,9 +1,9 @@
 import { Button, Card, Input, Modal, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import BuildingForm from './Form'
-import { deleteBuilding, getAllBuilding } from '../../../services/building'
-import makeColumns from '../../../utils/column'
-import buildingFields from './fields'
+import { deleteBuilding, getAllBuilding } from 'src/services/building'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
 
 const Building = () => {
   const [mode, setMode] = useState('Data')
@@ -64,7 +64,7 @@ const Building = () => {
     })
   }
 
-  const columns = makeColumns(buildingFields, onEdit, onDelete)
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()

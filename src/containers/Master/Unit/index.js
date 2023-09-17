@@ -1,9 +1,9 @@
 import { Button, Card, Input, Modal, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import UnitForm from './Form'
-import { deleteUnit, getAllUnit } from '../../../services/unit'
-import makeColumns from '../../../utils/column'
-import unitFields from './fields'
+import { deleteUnit, getAllUnit } from 'src/services/unit'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
 
 const Unit = () => {
   const [mode, setMode] = useState('Data')
@@ -55,7 +55,7 @@ const Unit = () => {
     })
   }
 
-  const columns = makeColumns(unitFields, onEdit, onDelete)
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()

@@ -1,9 +1,9 @@
 import { Button, Card, Input, Modal, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import InventoryForm from './Form'
-import { deleteInventory, getAllInventory } from '../../services/inventory'
-import makeColumns from '../../utils/column'
-import inventoryFields from './fields'
+import { deleteInventory, getAllInventory } from 'src/services/inventory'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
 
 const Inventory = () => {
   const [mode, setMode] = useState('Data')
@@ -64,7 +64,7 @@ const Inventory = () => {
     })
   }
 
-  const columns = makeColumns(inventoryFields, onEdit, onDelete, true)
+  const columns = makeColumns(fields, onEdit, onDelete, true)
 
   useEffect(() => {
     getData()

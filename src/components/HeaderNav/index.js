@@ -1,7 +1,7 @@
 import { Dropdown } from 'antd'
-import logo from '../../assets/images/logo.png'
-import user from '../../assets/images/user.png'
-import { getItem } from '../../utils/menu-item'
+import logo from 'src/assets/images/logo.png'
+import user from 'src/assets/images/user.png'
+import { getItem } from 'src/utils/menu-item'
 
 const HeaderNav = () => {
   const items = [

@@ -1,13 +1,10 @@
 import { Button, Card, Input, Modal, Select, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import DepartmentForm from './Form'
-import {
-  deleteDepartment,
-  getAllDepartment,
-} from '../../../services/department'
-import makeColumns from '../../../utils/column'
-import departmentFields from './fields'
-import { getAllUnit } from '../../../services/unit'
+import { deleteDepartment, getAllDepartment } from 'src/services/department'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
+import { getAllUnit } from 'src/services/unit'
 
 const Department = () => {
   const [mode, setMode] = useState('Data')
@@ -81,7 +78,7 @@ const Department = () => {
     })
   }
 
-  const columns = makeColumns(departmentFields, onEdit, onDelete)
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()

@@ -1,13 +1,13 @@
 import { Button, Card, Form, Spin, notification } from 'antd'
-import DefaultForm from '../../../components/DefaultForm'
-import identityFields from './fields'
+import DefaultForm from 'src/components/DefaultForm'
+import fields from './fields'
 import { useEffect, useRef, useState } from 'react'
 import {
   getSchoolIdentity,
   storeSchoolIdentity,
   updateSchoolIdentity,
-} from '../../../services/schoolidentity'
-import callNotify from '../../../utils/notify'
+} from 'src/services/schoolidentity'
+import callNotify from 'src/utils/notify'
 
 const SchoolIdentity = (props) => {
   const inputRef = useRef(null)
@@ -136,7 +136,7 @@ const SchoolIdentity = (props) => {
           >
             <DefaultForm
               form={form}
-              fields={identityFields}
+              fields={fields}
               readonly={mode === 'Data' ? true : false}
               onFinish={onFinish}
               withRef={inputRef}

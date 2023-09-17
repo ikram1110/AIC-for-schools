@@ -1,4 +1,4 @@
-import UnderConstruction from '../../components/UnderConstruction'
+import UnderConstruction from 'src/components/UnderConstruction'
 
 const Dashboard = () => {
   return <UnderConstruction />

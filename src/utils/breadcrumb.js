@@ -185,6 +185,16 @@ const breadCrumbItem = [
     ],
   },
   {
+    route: '/master/ruang-kelas',
+    items: [
+      crumbDash,
+      crumbChevron('Master'),
+      {
+        title: 'Ruang Kelas',
+      },
+    ],
+  },
+  {
     route: '/master/golongan',
     items: [
       crumbDash,
@@ -195,12 +205,32 @@ const breadCrumbItem = [
     ],
   },
   {
+    route: '/master/jenis-ptk',
+    items: [
+      crumbDash,
+      crumbChevron('Master'),
+      {
+        title: 'Jenis PTK',
+      },
+    ],
+  },
+  {
     route: '/master/jabatan',
     items: [
       crumbDash,
       crumbChevron('Master'),
       {
         title: 'Jabatan',
+      },
+    ],
+  },
+  {
+    route: '/master/status-pegawai',
+    items: [
+      crumbDash,
+      crumbChevron('Master'),
+      {
+        title: 'Status Pegawai',
       },
     ],
   },

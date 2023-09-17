@@ -1,13 +1,17 @@
 import { Button, Card, Form } from 'antd'
 import { useEffect, useState } from 'react'
-import { storeInventory, updateInventory } from '../../services/inventory'
-import DefaultFormImage from '../../components/DefaultFormImage'
-import inventoryFields from './fields'
-import callNotify from '../../utils/notify'
+import { storeInventory, updateInventory } from 'src/services/inventory'
+import DefaultFormImage from 'src/components/DefaultFormImage'
+import fields from './fields'
+import callNotify from 'src/utils/notify'
+import moment from 'moment'
 
 const InventoryForm = (props) => {
   const { mode, setMode, getData, itemEdit, notify } = props
   const [loading, setLoading] = useState(false)
+  const [imageUrl, setImageUrl] = useState('')
+  const [changeImage, setChangeImage] = useState(false)
+  const [uploadImage, setUploadImage] = useState([])
 
   const [form] = Form.useForm()
 
@@ -21,12 +25,28 @@ const InventoryForm = (props) => {
       .validateFields()
       .then(async () => {
         setLoading(true)
+        let formData = new FormData()
+
+        for (const key in values) {
+          if (key === 'image') continue
+          if (Object.hasOwnProperty.call(values, key)) {
+            if (values[key] === undefined || values[key] === null) {
+            } else {
+              if (key === 'receiptDate')
+                formData.append(key, moment(values[key]).format('YYYY-MM-DD'))
+              else formData.append(key, values[key])
+            }
+          }
+        }
+        if (changeImage === true)
+          if (imageUrl !== '')
+            formData.append('image', uploadImage[0].originFileObj)
         if (mode === 'Tambah') {
-          await storeInventory(values).then((res) => {
+          await storeInventory(formData).then((res) => {
             callNotify(notify, res, mode, setLoading, getData, setMode, onReset)
           })
         } else {
-          await updateInventory(itemEdit.id, values).then((res) => {
+          await updateInventory(itemEdit.id, formData).then((res) => {
             callNotify(notify, res, mode, setLoading, getData, setMode, onReset)
           })
         }
@@ -41,14 +61,31 @@ const InventoryForm = (props) => {
   const onFill = () => {
     form.setFieldsValue({
       code: itemEdit.code,
+      idUnit: itemEdit.idUnit,
       name: itemEdit.name,
-      floor: itemEdit.floor,
+      description: itemEdit.description,
+      condition: itemEdit.condition,
+      quantity: itemEdit.quantity,
+      source: itemEdit.source,
+      receiptDate:
+        itemEdit.receiptDate !== null
+          ? moment(itemEdit.receiptDate)
+          : itemEdit.receiptDate,
+      responsiblePerson: itemEdit.responsiblePerson,
+      image: itemEdit.image,
+      capacity: itemEdit.capacity,
       length: itemEdit.length,
       height: itemEdit.height,
       width: itemEdit.width,
-      description: itemEdit.description,
-      active: itemEdit.active,
     })
+    if (itemEdit.image !== null) {
+      setImageUrl(
+        process.env.REACT_APP_API_URL +
+          '/public/images/inventory/' +
+          itemEdit.image
+      )
+    }
+    console.log(itemEdit.image)
   }
 
   useEffect(() => {
@@ -82,7 +119,11 @@ const InventoryForm = (props) => {
       <div style={{ maxHeight: `calc(${vh}px - 240px)`, overflowY: 'scroll' }}>
         <DefaultFormImage
           form={form}
-          fields={inventoryFields}
+          fields={fields}
+          imageUrl={imageUrl}
+          setImageUrl={setImageUrl}
+          setChangeImage={setChangeImage}
+          setUploadImage={setUploadImage}
           onFinish={onFinish}
           imageName={'image'}
         />

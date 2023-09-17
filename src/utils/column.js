@@ -3,13 +3,14 @@ import { Button, Space } from 'antd'
 const makeColumns = (fields, onEdit, onDelete, rightAction = false) => {
   const columns = []
   fields.forEach((item) => {
-    columns.push({
-      title: item.label,
-      dataIndex: item.name,
-      key: item.name,
-      render: item.render,
-      fixed: item.fixed ?? null,
-    })
+    if (item.showInTable !== false)
+      columns.push({
+        title: item.label,
+        dataIndex: item.name,
+        key: item.name,
+        render: item.render,
+        fixed: item.fixed ?? null,
+      })
   })
   columns.push({
     title: 'Aksi',

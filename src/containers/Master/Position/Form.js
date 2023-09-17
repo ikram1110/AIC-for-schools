@@ -1,9 +1,9 @@
 import { Button, Card, Form } from 'antd'
 import { useEffect, useState } from 'react'
-import { storePosition, updatePosition } from '../../../services/position'
-import DefaultForm from '../../../components/DefaultForm'
-import curriculumFields from './fields'
-import callNotify from '../../../utils/notify'
+import { storePosition, updatePosition } from 'src/services/position'
+import DefaultForm from 'src/components/DefaultForm'
+import fields from './fields'
+import callNotify from 'src/utils/notify'
 
 const PositionForm = (props) => {
   const { mode, setMode, getData, itemEdit, notify } = props
@@ -68,7 +68,7 @@ const PositionForm = (props) => {
         </div>
       }
     >
-      <DefaultForm form={form} fields={curriculumFields} onFinish={onFinish} />
+      <DefaultForm form={form} fields={fields} onFinish={onFinish} />
     </Card>
   )
 }

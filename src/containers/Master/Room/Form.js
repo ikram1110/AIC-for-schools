@@ -1,9 +1,9 @@
 import { Button, Card, Form } from 'antd'
 import { useEffect, useState } from 'react'
-import { storeRoom, updateRoom } from '../../../services/room'
-import DefaultForm from '../../../components/DefaultForm'
-import roomFields from './fields'
-import callNotify from '../../../utils/notify'
+import { storeRoom, updateRoom } from 'src/services/room'
+import DefaultForm from 'src/components/DefaultForm'
+import fields from './fields'
+import callNotify from 'src/utils/notify'
 
 const RoomForm = (props) => {
   const { mode, setMode, getData, itemEdit, notify } = props
@@ -73,7 +73,7 @@ const RoomForm = (props) => {
         </div>
       }
     >
-      <DefaultForm form={form} fields={roomFields} onFinish={onFinish} />
+      <DefaultForm form={form} fields={fields} onFinish={onFinish} />
     </Card>
   )
 }

@@ -1,19 +1,16 @@
 import { Tag } from 'antd'
-import { getAllBuilding } from '../../../services/building'
+import { getAllBuilding } from 'src/services/building'
 
 const roomFields = [
   {
     label: 'Kode Ruangan',
     name: 'code',
-    render: null,
     require: true,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Nama Gedung',
     name: 'nameBuilding',
-    render: null,
     require: true,
     type: 'select',
     inputItems: await getAllBuilding().then((results) => {
@@ -30,34 +27,26 @@ const roomFields = [
   {
     label: 'Nama Ruangan',
     name: 'name',
-    render: null,
     require: true,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Kapasitas Belajar',
     name: 'lessonCapacity',
-    render: null,
     require: false,
     type: 'number',
-    inputItems: null,
   },
   {
     label: 'Kapasitas Ujian',
     name: 'testCapacity',
-    render: null,
     require: false,
     type: 'number',
-    inputItems: null,
   },
   {
     label: 'Keterangan',
     name: 'description',
-    render: null,
     require: false,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Status Aktif',

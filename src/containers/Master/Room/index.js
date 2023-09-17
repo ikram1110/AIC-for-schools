@@ -1,10 +1,10 @@
 import { Button, Card, Input, Modal, Select, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import RoomForm from './Form'
-import { deleteRoom, getAllRoom } from '../../../services/room'
-import makeColumns from '../../../utils/column'
-import roomFields from './fields'
-import { getAllBuilding } from '../../../services/building'
+import { deleteRoom, getAllRoom } from 'src/services/room'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
+import { getAllBuilding } from 'src/services/building'
 
 const Room = () => {
   const [mode, setMode] = useState('Data')
@@ -78,7 +78,7 @@ const Room = () => {
     })
   }
 
-  const columns = makeColumns(roomFields, onEdit, onDelete)
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()

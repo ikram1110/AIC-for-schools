@@ -1,11 +1,14 @@
 import { Button, Card, Input, Modal, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
-import ClassForm from './Form'
-import { deleteClass, getAllClass } from '../../../services/class'
-import makeColumns from '../../../utils/column'
-import classFields from './fields'
+import EmployeeStatusForm from './Form'
+import {
+  deleteEmployeeStatus,
+  getAllEmployeeStatus,
+} from 'src/services/employeestatus'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
 
-const Class = () => {
+const EmployeeStatus = () => {
   const [mode, setMode] = useState('Data')
   const [itemEdit, setItemEdit] = useState({})
   const [loading, setLoading] = useState(false)
@@ -55,14 +58,14 @@ const Class = () => {
       },
       async onOk() {
         setLoadingDel(true)
-        await deleteClass(id)
+        await deleteEmployeeStatus(id)
         getData()
         setLoadingDel(false)
       },
     })
   }
 
-  const columns = makeColumns(classFields, onEdit, onDelete)
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()
@@ -70,7 +73,7 @@ const Class = () => {
 
   const getData = async () => {
     setLoading(true)
-    const response = await getAllClass()
+    const response = await getAllEmployeeStatus()
     setSource(response)
     setLoading(false)
   }
@@ -81,7 +84,7 @@ const Class = () => {
       {contextHolderNotify}
       {mode === 'Data' ? (
         <Card
-          title="Data Golongan"
+          title="Data Status Pegawai"
           extra={
             <div className="action-card">
               <Input
@@ -111,7 +114,7 @@ const Class = () => {
           />
         </Card>
       ) : (
-        <ClassForm
+        <EmployeeStatusForm
           mode={mode}
           setMode={setMode}
           getData={getData}
@@ -123,4 +126,4 @@ const Class = () => {
   )
 }
 
-export default Class
+export default EmployeeStatus

@@ -4,10 +4,8 @@ const curriculumFields = [
   {
     label: 'Nama Kurikulum',
     name: 'name',
-    render: null,
     require: true,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Status Aktif',

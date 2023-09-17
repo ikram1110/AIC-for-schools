@@ -1,19 +1,15 @@
-const classFields = [
+const employeeStatusFields = [
   {
-    label: 'Nama Golongan',
+    label: 'Nama Status',
     name: 'name',
-    render: null,
     require: true,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Keterangan',
     name: 'description',
-    render: null,
     require: false,
     type: 'input',
-    inputItems: null,
   },
 ]
-export default classFields
+export default employeeStatusFields

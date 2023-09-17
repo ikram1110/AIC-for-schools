@@ -61,6 +61,13 @@ const navRoute = [
       },
       {
         icon: null,
+        label: 'Ruang Kelas',
+        title: 'Data Ruang Kelas',
+        href: '/master/ruang-kelas',
+        children: null,
+      },
+      {
+        icon: null,
         label: 'Golongan',
         title: 'Data Golongan',
         href: '/master/golongan',
@@ -68,9 +75,23 @@ const navRoute = [
       },
       {
         icon: null,
+        label: 'Jenis PTK',
+        title: 'Data Jenis PTK',
+        href: '/master/jenis-ptk',
+        children: null,
+      },
+      {
+        icon: null,
         label: 'Jabatan',
         title: 'Data Jabatan',
         href: '/master/jabatan',
+        children: null,
+      },
+      {
+        icon: null,
+        label: 'Status Pegawai',
+        title: 'Data Status Pegawai',
+        href: '/master/status-pegawai',
         children: null,
       },
     ],

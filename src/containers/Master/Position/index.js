@@ -1,9 +1,9 @@
 import { Button, Card, Input, Modal, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import PositionForm from './Form'
-import { deletePosition, getAllPosition } from '../../../services/position'
-import makeColumns from '../../../utils/column'
-import positionFields from './fields'
+import { deletePosition, getAllPosition } from 'src/services/position'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
 
 const Position = () => {
   const [mode, setMode] = useState('Data')
@@ -62,7 +62,7 @@ const Position = () => {
     })
   }
 
-  const columns = makeColumns(positionFields, onEdit, onDelete)
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()

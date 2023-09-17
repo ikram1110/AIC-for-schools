@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export default axios.create({
-  baseURL: 'https://apisiakad.binaries.id',
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     // Authorization: `Bearer ${localStorage.getItem('token')}`
   },

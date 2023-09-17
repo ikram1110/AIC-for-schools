@@ -1,5 +1,6 @@
 const initialState = {
   key: 'global',
+  employeeByUnit: [],
 }
 
 export const globalReducer = (state = initialState, action) => {

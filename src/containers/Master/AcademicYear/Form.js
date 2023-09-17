@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react'
 import {
   storeAcademicYear,
   updateAcademicYear,
-} from '../../../services/academicyear'
-import DefaultForm from '../../../components/DefaultForm'
-import academicYearFields from './fields'
-import callNotify from '../../../utils/notify'
+} from 'src/services/academicyear'
+import DefaultForm from 'src/components/DefaultForm'
+import fields from './fields'
+import callNotify from 'src/utils/notify'
 
 const AcademicYearForm = (props) => {
   const { mode, setMode, getData, itemEdit, notify } = props
@@ -73,11 +73,7 @@ const AcademicYearForm = (props) => {
         </div>
       }
     >
-      <DefaultForm
-        form={form}
-        fields={academicYearFields}
-        onFinish={onFinish}
-      />
+      <DefaultForm form={form} fields={fields} onFinish={onFinish} />
     </Card>
   )
 }

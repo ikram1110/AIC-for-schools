@@ -1,12 +1,9 @@
 import { Button, Card, Input, Modal, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import CurriculumForm from './Form'
-import {
-  deleteCurriculum,
-  getAllCurriculum,
-} from '../../../services/curriculum'
-import makeColumns from '../../../utils/column'
-import classFields from './fields'
+import { deleteCurriculum, getAllCurriculum } from 'src/services/curriculum'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
 
 const Curriculum = () => {
   const [mode, setMode] = useState('Data')
@@ -65,7 +62,7 @@ const Curriculum = () => {
     })
   }
 
-  const columns = makeColumns(classFields, onEdit, onDelete)
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()

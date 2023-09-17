@@ -1,6 +1,6 @@
 import { Menu } from 'antd'
-import { getItem } from '../../utils/menu-item'
-import navRoute from '../../utils/nav-route'
+import { getItem } from 'src/utils/menu-item'
+import navRoute from 'src/utils/nav-route'
 import { Link } from 'react-router-dom'
 
 const SideNav = () => {

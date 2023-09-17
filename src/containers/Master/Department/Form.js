@@ -1,9 +1,9 @@
 import { Button, Card, Form } from 'antd'
 import { useEffect, useState } from 'react'
-import { storeDepartment, updateDepartment } from '../../../services/department'
-import DefaultForm from '../../../components/DefaultForm'
-import departmentFields from './fields'
-import callNotify from '../../../utils/notify'
+import { storeDepartment, updateDepartment } from 'src/services/department'
+import DefaultForm from 'src/components/DefaultForm'
+import fields from './fields'
+import callNotify from 'src/utils/notify'
 
 const DepartmentForm = (props) => {
   const { mode, setMode, getData, itemEdit, notify } = props
@@ -74,7 +74,7 @@ const DepartmentForm = (props) => {
         </div>
       }
     >
-      <DefaultForm form={form} fields={departmentFields} onFinish={onFinish} />
+      <DefaultForm form={form} fields={fields} onFinish={onFinish} />
     </Card>
   )
 }

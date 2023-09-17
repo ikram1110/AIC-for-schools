@@ -1,11 +1,11 @@
 import { Button, Card, Form } from 'antd'
 import { useEffect, useState } from 'react'
-import { storeClass, updateClass } from '../../../services/class'
-import DefaultForm from '../../../components/DefaultForm'
-import curriculumFields from './fields'
-import callNotify from '../../../utils/notify'
+import { storeGrade, updateGrade } from 'src/services/grade'
+import DefaultForm from 'src/components/DefaultForm'
+import fields from './fields'
+import callNotify from 'src/utils/notify'
 
-const ClassForm = (props) => {
+const GradeForm = (props) => {
   const { mode, setMode, getData, itemEdit, notify } = props
   const [loading, setLoading] = useState(false)
 
@@ -17,11 +17,11 @@ const ClassForm = (props) => {
       .then(async () => {
         setLoading(true)
         if (mode === 'Tambah') {
-          await storeClass(values).then((res) => {
+          await storeGrade(values).then((res) => {
             callNotify(notify, res, mode, setLoading, getData, setMode, onReset)
           })
         } else {
-          await updateClass(itemEdit.id, values).then((res) => {
+          await updateGrade(itemEdit.id, values).then((res) => {
             callNotify(notify, res, mode, setLoading, getData, setMode, onReset)
           })
         }
@@ -68,9 +68,9 @@ const ClassForm = (props) => {
         </div>
       }
     >
-      <DefaultForm form={form} fields={curriculumFields} onFinish={onFinish} />
+      <DefaultForm form={form} fields={fields} onFinish={onFinish} />
     </Card>
   )
 }
 
-export default ClassForm
+export default GradeForm

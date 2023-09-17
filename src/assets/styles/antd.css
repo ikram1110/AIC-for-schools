@@ -21,10 +21,14 @@
 }
 
 /* image upload */
+.ant-upload-list{
+  height: 100%;
+}
 .image-uploader{
   height: 100%;
 }
 .image-uploader .ant-upload.ant-upload-select{
   height: 100% !important;
   width: 100% !important;
+  border-radius: 4px !important;
 }

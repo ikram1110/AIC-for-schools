@@ -1,19 +1,16 @@
 import { Tag } from 'antd'
-import { getAllUnit } from '../../../services/unit'
+import { getAllUnit } from 'src/services/unit'
 
 const roomFields = [
   {
     label: 'Kode Jurusan',
     name: 'code',
-    render: null,
     require: true,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Nama Unit',
     name: 'nameUnit',
-    render: null,
     require: true,
     type: 'select',
     inputItems: await getAllUnit().then((results) => {
@@ -30,42 +27,32 @@ const roomFields = [
   {
     label: 'Nama Jurusan',
     name: 'name',
-    render: null,
     require: true,
     type: 'input',
-    inputItems: null,
   },
   {
-    label: 'Kemampuan',
+    label: 'Bidang Keahlian',
     name: 'expertise',
-    render: null,
     require: false,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Kompetensi Umum',
     name: 'generalCompetence',
-    render: null,
     require: false,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Kompetensi Khusus',
     name: 'specialCompetence',
-    render: null,
     require: false,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Keterangan',
     name: 'description',
-    render: null,
     require: false,
     type: 'input',
-    inputItems: null,
   },
   {
     label: 'Status Aktif',

@@ -2,11 +2,11 @@ import { Breadcrumb, Layout } from 'antd'
 import { Fragment, useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { useLocation } from 'react-router-dom'
-import MainRouter from '../../routes/MainRouter'
-import SideNav from '../../components/SideNav'
-import HeaderNav from '../../components/HeaderNav'
-import favicon from '../../assets/images/logo.png'
-import breadCrumbItem from '../../utils/breadcrumb'
+import MainRouter from 'src/routes/MainRouter'
+import SideNav from 'src/components/SideNav'
+import HeaderNav from 'src/components/HeaderNav'
+import favicon from 'src/assets/images/logo.png'
+import breadCrumbItem from 'src/utils/breadcrumb'
 
 const Main = () => {
   const [collapsed, setCollapsed] = useState(false)

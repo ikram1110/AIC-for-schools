@@ -4,9 +4,9 @@ import AcademicYearForm from './Form'
 import {
   deleteAcademicYear,
   getAllAcademicYear,
-} from '../../../services/academicyear'
-import makeColumns from '../../../utils/column'
-import academicYearFields from './fields'
+} from 'src/services/academicyear'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
 
 const AcademicYear = () => {
   const [mode, setMode] = useState('Data')
@@ -67,7 +67,7 @@ const AcademicYear = () => {
     })
   }
 
-  const columns = makeColumns(academicYearFields, onEdit, onDelete)
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()
