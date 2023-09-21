@@ -26,7 +26,6 @@ const DefaultFormImage = (props) => {
     withRef,
     nameRef,
   } = props
-  const { onChangeUnit } = props.functions
 
   const [loadingImg, setLoadingImg] = useState(false)
   const [notify, contextHolderNotify] = notification.useNotification()
@@ -125,12 +124,7 @@ const DefaultFormImage = (props) => {
                       ) : item.type === 'password' ? (
                         <Input.Password />
                       ) : item.type === 'select' ? (
-                        <Select
-                          options={item.inputItems}
-                          onChange={
-                            item.name === 'idUnit' ? () => onChangeUnit() : null
-                          }
-                        />
+                        <Select options={item.inputItems} />
                       ) : item.type === 'radio' ? (
                         <Radio.Group>
                           {item.inputItems.map((rItem) => {

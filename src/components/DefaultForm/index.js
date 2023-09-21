@@ -2,7 +2,6 @@ import { Form, Input, Radio, Select } from 'antd'
 
 const DefaultForm = (props) => {
   const { form, fields, onFinish, readonly, withRef, nameRef } = props
-  // const { onChangeUnit, onChangeBuilding } = props.functions
 
   return (
     <Form
@@ -42,13 +41,7 @@ const DefaultForm = (props) => {
             ) : item.type === 'number' ? (
               <Input type="number" readOnly={readonly ?? false} />
             ) : item.type === 'select' ? (
-              <Select
-                options={item.inputItems}
-                onChange={
-                  // item.name === 'nameUnit' ? () => onChangeUnit() : null
-                  item.onChange ? () => item.onChange() : null
-                }
-              />
+              <Select options={item.inputItems} />
             ) : item.type === 'radio' ? (
               <Radio.Group>
                 {item.inputItems.map((rItem) => {

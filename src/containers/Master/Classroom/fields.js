@@ -1,6 +1,5 @@
 import { getAllBuilding } from 'src/services/building'
 import { getAllDepartment } from 'src/services/department'
-import { getAllEmployeeByUnit } from 'src/services/employee'
 import { getAllUnit } from 'src/services/unit'
 
 const classroomFields = [
@@ -25,10 +24,6 @@ const classroomFields = [
       return response
     }),
     idInput: 'idUnit',
-    onChange: (id) => {
-      getAllEmployeeByUnit(id)
-      console.log('change func on fields')
-    },
   },
   {
     label: 'Nama Kelas',

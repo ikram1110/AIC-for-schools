@@ -16,6 +16,23 @@ const getAllDepartment = async () => {
   }
 }
 
+const getAllDepartmentByUnit = async (idUnit) => {
+  try {
+    const results = await axios.get(`/master/department`)
+    const response = results.data.map((result) => {
+      const { unit, ...rest } = result
+      return {
+        ...rest,
+        nameUnit: unit.name,
+      }
+    })
+    const newResponse = response.filter((x) => x.idUnit.includes(idUnit))
+    return newResponse
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 const storeDepartment = async (data) => {
   try {
     const response = await axios.post(`/master/department`, data)
@@ -43,4 +60,10 @@ const deleteDepartment = async (id) => {
   }
 }
 
-export { getAllDepartment, storeDepartment, deleteDepartment, updateDepartment }
+export {
+  getAllDepartment,
+  getAllDepartmentByUnit,
+  storeDepartment,
+  deleteDepartment,
+  updateDepartment,
+}

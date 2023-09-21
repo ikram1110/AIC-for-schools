@@ -16,6 +16,25 @@ const getAllRoom = async () => {
   }
 }
 
+const getAllRoomByBuilding = async (idBuilding) => {
+  try {
+    const results = await axios.get(`/master/room`)
+    const response = results.data.map((result) => {
+      const { building, ...rest } = result
+      return {
+        ...rest,
+        nameBuilding: building.name,
+      }
+    })
+    const newResponse = response.filter((x) =>
+      x.idBuilding.includes(idBuilding)
+    )
+    return newResponse
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 const storeRoom = async (data) => {
   try {
     const response = await axios.post(`/master/room`, data)
@@ -43,4 +62,4 @@ const deleteRoom = async (id) => {
   }
 }
 
-export { getAllRoom, storeRoom, deleteRoom, updateRoom }
+export { getAllRoom, getAllRoomByBuilding, storeRoom, deleteRoom, updateRoom }

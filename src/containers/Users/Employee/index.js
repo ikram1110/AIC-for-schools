@@ -1,9 +1,10 @@
-import { Button, Card, Input, Modal, Table, notification } from 'antd'
+import { Button, Card, Input, Modal, Select, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import EmployeeForm from './Form'
 import { deleteEmployee, getAllEmployee } from 'src/services/employee'
 import makeColumns from 'src/utils/column'
 import fields from './fields'
+import { getAllUnit } from 'src/services/unit'
 
 const Employee = () => {
   const [mode, setMode] = useState('Data')
@@ -11,7 +12,9 @@ const Employee = () => {
   const [loading, setLoading] = useState(false)
   const [loadingDel, setLoadingDel] = useState(false)
   const [source, setSource] = useState([])
+  const [filterUnit, setFilterUnit] = useState([])
   const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState('')
   const [actSource, setActSource] = useState([])
 
   const [modal, contextHolderModal] = Modal.useModal()
@@ -24,18 +27,32 @@ const Employee = () => {
 
   useEffect(() => {
     let tmpData = []
-    if (search !== '')
+    if (search !== '' && filter === '')
       tmpData = source.filter(
         (x) =>
           x.nip.toLowerCase().includes(search.toLowerCase()) ||
           x.name.toLowerCase().includes(search.toLowerCase())
       )
+    else if (search === '' && filter !== '')
+      tmpData = source.filter((x) => x.idUnit.includes(filter))
+    else if (search !== '' && filter !== '')
+      tmpData = source.filter(
+        (x) =>
+          x.nip.toLowerCase().includes(search.toLowerCase()) ||
+          x.name.toLowerCase().includes(search.toLowerCase()) ||
+          x.idUnit.includes(filter)
+      )
     setActSource(tmpData)
     // eslint-disable-next-line
-  }, [search])
+  }, [search, filter])
 
   const onSearch = (text) => {
     setSearch(text)
+  }
+
+  const onFilter = (text) => {
+    if (text === undefined) setFilter('')
+    else setFilter(text)
   }
 
   const onEdit = (id) => {
@@ -74,6 +91,15 @@ const Employee = () => {
     setLoading(true)
     const response = await getAllEmployee()
     setSource(response)
+    const resUnit = await getAllUnit()
+    const unitItems = []
+    resUnit.forEach((item) => {
+      unitItems.push({
+        value: item.id,
+        label: item.name,
+      })
+    })
+    setFilterUnit(unitItems)
     setLoading(false)
   }
 
@@ -90,6 +116,13 @@ const Employee = () => {
                 placeholder="Pencarian..."
                 className="action-search"
                 onChange={(e) => onSearch(e.target.value)}
+              />
+              <Select
+                placeholder="Unit"
+                allowClear={true}
+                className="action-filter"
+                options={filterUnit}
+                onChange={(e) => onFilter(e)}
               />
               <Button
                 type="primary"
