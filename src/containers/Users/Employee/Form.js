@@ -118,7 +118,6 @@ const EmployeeForm = (props) => {
           itemEdit.photo
       )
     }
-    console.log(itemEdit.photo)
   }
 
   useEffect(() => {

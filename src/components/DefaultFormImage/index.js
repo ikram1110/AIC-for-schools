@@ -119,7 +119,7 @@ const DefaultFormImage = (props) => {
                         <InputNumber
                           style={{ width: '100%' }}
                           readOnly={readonly ?? false}
-                          controls={item.controlNumber ?? false}
+                          controls={item.controlNumber ?? true}
                         />
                       ) : item.type === 'password' ? (
                         <Input.Password />

@@ -1,4 +1,4 @@
-import { Form, Input, Radio, Select } from 'antd'
+import { Form, Input, InputNumber, Radio, Select, Typography } from 'antd'
 
 const DefaultForm = (props) => {
   const { form, fields, onFinish, readonly, withRef, nameRef } = props
@@ -13,6 +13,12 @@ const DefaultForm = (props) => {
       onFinish={onFinish}
     >
       {fields.map((item) => {
+        if (item.name === 'titleform')
+          return (
+            <Typography.Title key={item.label} level={4}>
+              {item.label}
+            </Typography.Title>
+          )
         return (
           <Form.Item
             key={item.name}
@@ -39,7 +45,11 @@ const DefaultForm = (props) => {
                 }
               />
             ) : item.type === 'number' ? (
-              <Input type="number" readOnly={readonly ?? false} />
+              <InputNumber
+                style={{ width: '100%' }}
+                readOnly={readonly ?? false}
+                controls={item.controlNumber ?? true}
+              />
             ) : item.type === 'select' ? (
               <Select options={item.inputItems} />
             ) : item.type === 'radio' ? (

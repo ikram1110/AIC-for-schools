@@ -1,7 +1,7 @@
 import { Tag } from 'antd'
 import { getAllUnit } from 'src/services/unit'
 
-const roomFields = [
+const departmentFields = [
   {
     label: 'Kode Jurusan',
     name: 'code',
@@ -74,4 +74,4 @@ const roomFields = [
     ],
   },
 ]
-export default roomFields
+export default departmentFields

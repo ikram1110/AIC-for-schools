@@ -24,6 +24,11 @@ const ClassroomForm = (props) => {
 
   const [form] = Form.useForm()
 
+  const vh = Math.max(
+    document.documentElement.clientHeight || 0,
+    window.innerHeight || 0
+  )
+
   const onFinish = (values) => {
     form
       .validateFields()
@@ -169,142 +174,144 @@ const ClassroomForm = (props) => {
         </div>
       }
     >
-      <Form
-        form={form}
-        labelCol={{
-          span: 4,
-        }}
-        layout="horizontal"
-        onFinish={onFinish}
-      >
-        <Form.Item
-          key="code"
-          label="Kode Kelas"
-          name="code"
-          rules={[
-            {
-              required: true,
-              message: `Mohon masukan Kode Kelas!`,
-            },
-          ]}
+      <div style={{ maxHeight: `calc(${vh}px - 240px)`, overflowY: 'scroll' }}>
+        <Form
+          form={form}
+          labelCol={{
+            span: 4,
+          }}
+          layout="horizontal"
+          onFinish={onFinish}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          key="idUnit"
-          label="Nama Unit"
-          name="idUnit"
-          rules={[
-            {
-              required: true,
-              message: `Mohon masukan Nama Unit!`,
-            },
-          ]}
-        >
-          {loadingUnit ? (
-            <Skeleton.Input active size="small" block />
-          ) : (
-            <Select options={unit} onChange={(id) => unitOnChange(id)} />
-          )}
-        </Form.Item>
-        <Form.Item
-          key="name"
-          label="Nama Kelas"
-          name="name"
-          rules={[
-            {
-              required: true,
-              message: `Mohon masukan Nama Kelas!`,
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          key="idEmployee"
-          label="Wali Kelas"
-          name="idEmployee"
-          rules={[
-            {
-              required: true,
-              message: `Mohon masukan Wali Kelas!`,
-            },
-          ]}
-        >
-          {loadingEmployee ? (
-            <Skeleton.Input active size="small" block />
-          ) : (
-            <Select options={employee} />
-          )}
-        </Form.Item>
-        <Form.Item
-          key="idDepartment"
-          label="Jurusan"
-          name="idDepartment"
-          rules={[
-            {
-              required: true,
-              message: `Mohon masukan Jurusan!`,
-            },
-          ]}
-        >
-          {loadingDepartment ? (
-            <Skeleton.Input active size="small" block />
-          ) : (
-            <Select options={department} />
-          )}
-        </Form.Item>
-        <Form.Item
-          key="idBuilding"
-          label="Gedung"
-          name="idBuilding"
-          rules={[
-            {
-              required: true,
-              message: `Mohon masukan Gedung!`,
-            },
-          ]}
-        >
-          {loadingBuilding ? (
-            <Skeleton.Input active size="small" block />
-          ) : (
-            <Select
-              options={building}
-              onChange={(id) => buildingOnChange(id)}
-            />
-          )}
-        </Form.Item>
-        <Form.Item
-          key="idRoom"
-          label="Ruangan"
-          name="idRoom"
-          rules={[
-            {
-              required: true,
-              message: `Mohon masukan Ruangan!`,
-            },
-          ]}
-        >
-          {loadingRoom ? (
-            <Skeleton.Input active size="small" block />
-          ) : (
-            <Select options={room} />
-          )}
-        </Form.Item>
-        <Form.Item
-          key="quantity"
-          label="Jumlah Siswa"
-          name="quantity"
-          rules={[
-            {
-              required: true,
-              message: `Mohon masukan Jumlah Siswa!`,
-            },
-          ]}
-        >
-          <InputNumber />
-        </Form.Item>
-      </Form>
+          <Form.Item
+            key="code"
+            label="Kode Kelas"
+            name="code"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukan Kode Kelas!`,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            key="idUnit"
+            label="Nama Unit"
+            name="idUnit"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukan Nama Unit!`,
+              },
+            ]}
+          >
+            {loadingUnit ? (
+              <Skeleton.Input active size="small" block />
+            ) : (
+              <Select options={unit} onChange={(id) => unitOnChange(id)} />
+            )}
+          </Form.Item>
+          <Form.Item
+            key="name"
+            label="Nama Kelas"
+            name="name"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukan Nama Kelas!`,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            key="idEmployee"
+            label="Wali Kelas"
+            name="idEmployee"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukan Wali Kelas!`,
+              },
+            ]}
+          >
+            {loadingEmployee ? (
+              <Skeleton.Input active size="small" block />
+            ) : (
+              <Select options={employee} />
+            )}
+          </Form.Item>
+          <Form.Item
+            key="idDepartment"
+            label="Jurusan"
+            name="idDepartment"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukan Jurusan!`,
+              },
+            ]}
+          >
+            {loadingDepartment ? (
+              <Skeleton.Input active size="small" block />
+            ) : (
+              <Select options={department} />
+            )}
+          </Form.Item>
+          <Form.Item
+            key="idBuilding"
+            label="Gedung"
+            name="idBuilding"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukan Gedung!`,
+              },
+            ]}
+          >
+            {loadingBuilding ? (
+              <Skeleton.Input active size="small" block />
+            ) : (
+              <Select
+                options={building}
+                onChange={(id) => buildingOnChange(id)}
+              />
+            )}
+          </Form.Item>
+          <Form.Item
+            key="idRoom"
+            label="Ruangan"
+            name="idRoom"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukan Ruangan!`,
+              },
+            ]}
+          >
+            {loadingRoom ? (
+              <Skeleton.Input active size="small" block />
+            ) : (
+              <Select options={room} />
+            )}
+          </Form.Item>
+          <Form.Item
+            key="quantity"
+            label="Jumlah Siswa"
+            name="quantity"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukan Jumlah Siswa!`,
+              },
+            ]}
+          >
+            <InputNumber />
+          </Form.Item>
+        </Form>
+      </div>
     </Card>
   )
 }
