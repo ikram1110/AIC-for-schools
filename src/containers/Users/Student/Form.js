@@ -303,7 +303,7 @@ const StudentForm = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: `Mohon masukan Nama Unit!`,
+                    message: `Mohon masukkan Nama Unit!`,
                   },
                 ]}
               >
@@ -320,7 +320,7 @@ const StudentForm = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: `Mohon masukan Jurusan!`,
+                    message: `Mohon masukkan Jurusan!`,
                   },
                 ]}
               >
@@ -340,7 +340,7 @@ const StudentForm = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: `Mohon masukan Kelas!`,
+                    message: `Mohon masukkan Kelas!`,
                   },
                 ]}
               >
@@ -357,7 +357,7 @@ const StudentForm = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: `Mohon masukan NIPD!`,
+                    message: `Mohon masukkan NIPD!`,
                   },
                 ]}
               >
@@ -370,7 +370,7 @@ const StudentForm = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: `Mohon masukan NISN!`,
+                    message: `Mohon masukkan NISN!`,
                   },
                 ]}
               >
@@ -383,7 +383,7 @@ const StudentForm = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: `Mohon masukan Nama!`,
+                    message: `Mohon masukkan Nama!`,
                   },
                 ]}
               >
@@ -396,7 +396,7 @@ const StudentForm = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: `Mohon masukan Angkatan!`,
+                    message: `Mohon masukkan Angkatan!`,
                   },
                 ]}
               >
@@ -511,7 +511,7 @@ const StudentForm = (props) => {
                 rules={[
                   {
                     required: true,
-                    message: `Mohon masukan Status Aktif!`,
+                    message: `Mohon masukkan Status Aktif!`,
                   },
                 ]}
               >

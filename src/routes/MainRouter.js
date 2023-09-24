@@ -14,6 +14,10 @@ import Position from 'src/containers/Master/Position'
 import EmployeeStatus from 'src/containers/Master/EmployeeStatus'
 import Student from 'src/containers/Users/Student'
 import Employee from 'src/containers/Users/Employee'
+import LessonGroup from 'src/containers/Academic/LessonGroup'
+import Lesson from 'src/containers/Academic/Lesson'
+import LessonSchedule from 'src/containers/Academic/LessonSchedule'
+import ValueRange from 'src/containers/Academic/ValueRange'
 import Inventory from 'src/containers/Inventory'
 
 const MainRouter = () => {
@@ -36,6 +40,14 @@ const MainRouter = () => {
 
       <Route path="/pengguna/siswa" element={<Student />} />
       <Route path="/pengguna/pegawai" element={<Employee />} />
+
+      <Route
+        path="/akademik/kelompok-mata-pelajaran"
+        element={<LessonGroup />}
+      />
+      <Route path="/akademik/mata-pelajaran" element={<Lesson />} />
+      <Route path="/akademik/jadwal-pelajaran" element={<LessonSchedule />} />
+      <Route path="/akademik/rentang-nilai" element={<ValueRange />} />
 
       <Route path="/inventaris" element={<Inventory />} />
     </Routes>

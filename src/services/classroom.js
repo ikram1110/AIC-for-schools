@@ -20,6 +20,27 @@ const getAllClassroom = async () => {
   }
 }
 
+const getAllClassroomByUnit = async (idUnit) => {
+  try {
+    const results = await axios.get(`/master/classroom`)
+    const response = results.data.map((result) => {
+      const { unit, employee, department, building, room, ...rest } = result
+      return {
+        ...rest,
+        nameUnit: unit.name,
+        nameEmployee: employee.name,
+        nameDepartment: department.name,
+        nameBuilding: building.name,
+        nameRoom: room.name,
+      }
+    })
+    const newResponse = response.filter((x) => x.idUnit.includes(idUnit))
+    return newResponse
+  } catch (e) {
+    return e.response.data
+  }
+}
+
 const getAllClassroomByDepartment = async (idDepartment) => {
   try {
     const results = await axios.get(`/master/classroom`)
@@ -72,6 +93,7 @@ const deleteClassroom = async (id) => {
 
 export {
   getAllClassroom,
+  getAllClassroomByUnit,
   getAllClassroomByDepartment,
   storeClassroom,
   deleteClassroom,

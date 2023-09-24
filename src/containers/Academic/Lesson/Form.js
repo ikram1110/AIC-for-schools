@@ -1,26 +1,35 @@
-import { Button, Card, Form, Input, InputNumber, Select, Skeleton } from 'antd'
+import {
+  Button,
+  Card,
+  Form,
+  Input,
+  InputNumber,
+  Radio,
+  Select,
+  Skeleton,
+} from 'antd'
 import { useEffect, useState } from 'react'
+import { getAllCurriculum } from 'src/services/curriculum'
 import { getAllDepartmentByUnit } from 'src/services/department'
 import { getAllEmployeeByUnit } from 'src/services/employee'
+import { storeLesson, updateLesson } from 'src/services/lesson'
+import { getAllLessonGroupByUnit } from 'src/services/lessongroup'
 import { getAllUnit } from 'src/services/unit'
-import { getAllBuilding } from 'src/services/building'
-import { getAllRoomByBuilding } from 'src/services/room'
-import { storeClassroom, updateClassroom } from 'src/services/classroom'
 import callNotify from 'src/utils/notify'
 
-const ClassroomForm = (props) => {
+const LessonForm = (props) => {
   const { mode, setMode, getData, itemEdit, notify } = props
   const [loading, setLoading] = useState(false)
   const [loadingUnit, setLoadingUnit] = useState(false)
-  const [loadingEmployee, setLoadingEmployee] = useState(false)
+  const [loadingCurriculum, setLoadingCurriculum] = useState(false)
   const [loadingDepartment, setLoadingDepartment] = useState(false)
-  const [loadingBuilding, setLoadingBuilding] = useState(false)
-  const [loadingRoom, setLoadingRoom] = useState(false)
+  const [loadingEmployee, setLoadingEmployee] = useState(false)
+  const [loadingLessonGroup, setLoadingLessonGroup] = useState(false)
   const [unit, setUnit] = useState([])
-  const [employee, setEmployee] = useState([])
+  const [curriculum, setCurriculum] = useState([])
   const [department, setDepartment] = useState([])
-  const [building, setBuilding] = useState([])
-  const [room, setRoom] = useState([])
+  const [employee, setEmployee] = useState([])
+  const [lessonGroup, setLessonGroup] = useState([])
 
   const [form] = Form.useForm()
 
@@ -35,11 +44,11 @@ const ClassroomForm = (props) => {
       .then(async () => {
         setLoading(true)
         if (mode === 'Tambah') {
-          await storeClassroom(values).then((res) => {
+          await storeLesson(values).then((res) => {
             callNotify(notify, res, mode, setLoading, getData, setMode, onReset)
           })
         } else {
-          await updateClassroom(itemEdit.id, values).then((res) => {
+          await updateLesson(itemEdit.id, values).then((res) => {
             callNotify(notify, res, mode, setLoading, getData, setMode, onReset)
           })
         }
@@ -53,35 +62,40 @@ const ClassroomForm = (props) => {
 
   const onFill = () => {
     setLoadingUnit(true)
-    setLoadingEmployee(true)
+    setLoadingCurriculum(true)
     setLoadingDepartment(true)
-    setLoadingBuilding(true)
-    setLoadingRoom(true)
+    setLoadingEmployee(true)
+    setLoadingLessonGroup(true)
     form.setFieldsValue({
-      code: itemEdit.code,
       idUnit: itemEdit.idUnit,
+      idCurriculum: itemEdit.idCurriculum,
+      code: itemEdit.code,
       name: itemEdit.name,
-      idEmployee: itemEdit.idEmployee,
       idDepartment: itemEdit.idDepartment,
-      idBuilding: itemEdit.idBuilding,
-      idRoom: itemEdit.idRoom,
-      quantity: itemEdit.quantity,
+      idEmployee: itemEdit.idEmployee,
+      level: itemEdit.level,
+      basicCompetence: itemEdit.basicCompetence,
+      specialCompetence: itemEdit.specialCompetence,
+      hours: itemEdit.hours,
+      index: itemEdit.index,
+      session: itemEdit.session,
+      idLessonGroup: itemEdit.idLessonGroup,
+      active: itemEdit.active,
     })
     unitOnChange(itemEdit.idUnit)
-    buildingOnChange(itemEdit.idBuilding)
   }
-
-  useEffect(() => {
-    setLoadingEmployee(false)
-  }, [employee])
 
   useEffect(() => {
     setLoadingDepartment(false)
   }, [department])
 
   useEffect(() => {
-    setLoadingRoom(false)
-  }, [room])
+    setLoadingEmployee(false)
+  }, [employee])
+
+  useEffect(() => {
+    setLoadingLessonGroup(false)
+  }, [lessonGroup])
 
   useEffect(() => {
     onReset()
@@ -100,18 +114,28 @@ const ClassroomForm = (props) => {
     })
     setUnit(unitItems)
 
-    const resBuilding = await getAllBuilding()
-    const buildingItems = []
-    resBuilding.forEach((item) => {
-      buildingItems.push({
+    const resCurriculum = await getAllCurriculum()
+    const curriculumItems = []
+    resCurriculum.forEach((item) => {
+      curriculumItems.push({
+        value: item.id,
+        label: item.name,
+      })
+    })
+    setCurriculum(curriculumItems)
+  }
+
+  const unitOnChange = async (id) => {
+    const resDepartment = await getAllDepartmentByUnit(id)
+    const departmentItems = []
+    resDepartment.forEach((item) => {
+      departmentItems.push({
         value: item.id,
         label: item.code + ' - ' + item.name,
       })
     })
-    setBuilding(buildingItems)
-  }
+    setDepartment(departmentItems)
 
-  const unitOnChange = async (id) => {
     const resEmployee = await getAllEmployeeByUnit(id)
     const employeeItems = []
     resEmployee.forEach((item) => {
@@ -122,29 +146,17 @@ const ClassroomForm = (props) => {
     })
     setEmployee(employeeItems)
 
-    const resDepartment = await getAllDepartmentByUnit(id)
-    const departmentItems = []
-    resDepartment.forEach((item) => {
-      departmentItems.push({
+    const resLessonGroup = await getAllLessonGroupByUnit(id)
+    const lessonGroupItems = []
+    resLessonGroup.forEach((item) => {
+      lessonGroupItems.push({
         value: item.id,
-        label: item.code + ' - ' + item.name,
+        label: item.name,
       })
     })
-    setDepartment(departmentItems)
+    setLessonGroup(lessonGroupItems)
     setLoadingUnit(false)
-  }
-
-  const buildingOnChange = async (id) => {
-    const resRoom = await getAllRoomByBuilding(id)
-    const roomItems = []
-    resRoom.forEach((item) => {
-      roomItems.push({
-        value: item.id,
-        label: item.code + ' - ' + item.name,
-      })
-    })
-    setRoom(roomItems)
-    setLoadingBuilding(false)
+    setLoadingCurriculum(false)
   }
 
   useEffect(() => {
@@ -154,7 +166,7 @@ const ClassroomForm = (props) => {
 
   return (
     <Card
-      title={mode + ' Data Ruang Kelas'}
+      title={mode + ' Data Mata Pelajaran'}
       extra={
         <div className="action-card">
           <Button
@@ -184,19 +196,6 @@ const ClassroomForm = (props) => {
           onFinish={onFinish}
         >
           <Form.Item
-            key="code"
-            label="Kode Kelas"
-            name="code"
-            rules={[
-              {
-                required: true,
-                message: `Mohon masukkan Kode Kelas!`,
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
             key="idUnit"
             label="Nama Unit"
             name="idUnit"
@@ -214,34 +213,27 @@ const ClassroomForm = (props) => {
             )}
           </Form.Item>
           <Form.Item
-            key="name"
-            label="Nama Kelas"
-            name="name"
+            key="idCurriculum"
+            label="Nama Kurikulum"
+            name="idCurriculum"
             rules={[
               {
                 required: true,
-                message: `Mohon masukkan Nama Kelas!`,
+                message: `Mohon masukkan Nama Kurikulum!`,
               },
             ]}
           >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            key="idEmployee"
-            label="Wali Kelas"
-            name="idEmployee"
-            rules={[
-              {
-                required: true,
-                message: `Mohon masukkan Wali Kelas!`,
-              },
-            ]}
-          >
-            {loadingEmployee ? (
+            {loadingCurriculum ? (
               <Skeleton.Input active size="small" block />
             ) : (
-              <Select options={employee} />
+              <Select options={curriculum} />
             )}
+          </Form.Item>
+          <Form.Item key="code" label="Kode Mata Pelajaran" name="code">
+            <Input />
+          </Form.Item>
+          <Form.Item key="name" label="Nama Mata Pelajaran" name="name">
+            <Input />
           </Form.Item>
           <Form.Item
             key="idDepartment"
@@ -261,54 +253,84 @@ const ClassroomForm = (props) => {
             )}
           </Form.Item>
           <Form.Item
-            key="idBuilding"
-            label="Gedung"
-            name="idBuilding"
+            key="idEmployee"
+            label="Guru Pengampu"
+            name="idEmployee"
             rules={[
               {
                 required: true,
-                message: `Mohon masukkan Gedung!`,
+                message: `Mohon masukkan Guru Pengampu!`,
               },
             ]}
           >
-            {loadingBuilding ? (
+            {loadingEmployee ? (
               <Skeleton.Input active size="small" block />
             ) : (
-              <Select
-                options={building}
-                onChange={(id) => buildingOnChange(id)}
-              />
+              <Select options={employee} />
             )}
           </Form.Item>
-          <Form.Item
-            key="idRoom"
-            label="Ruangan"
-            name="idRoom"
-            rules={[
-              {
-                required: true,
-                message: `Mohon masukkan Ruangan!`,
-              },
-            ]}
-          >
-            {loadingRoom ? (
-              <Skeleton.Input active size="small" block />
-            ) : (
-              <Select options={room} />
-            )}
+          <Form.Item key="level" label="Tingkat" name="level">
+            <Input />
           </Form.Item>
           <Form.Item
-            key="quantity"
-            label="Jumlah Siswa"
-            name="quantity"
-            rules={[
-              {
-                required: true,
-                message: `Mohon masukkan Jumlah Siswa!`,
-              },
-            ]}
+            key="basicCompetence"
+            label="Kompentensi Umum"
+            name="basicCompetence"
           >
+            <Input />
+          </Form.Item>
+          <Form.Item
+            key="specialCompetence"
+            label="Kompetensi Khusus"
+            name="specialCompetence"
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item key="hours" label="Jumlah Jam" name="hours">
             <InputNumber />
+          </Form.Item>
+          <Form.Item key="index" label="Urutan" name="index">
+            <InputNumber />
+          </Form.Item>
+          <Form.Item key="session" label="Sesi" name="session">
+            <Input />
+          </Form.Item>
+          <Form.Item
+            key="idLessonGroup"
+            label="Kelompok"
+            name="idLessonGroup"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukkan Kelompok!`,
+              },
+            ]}
+          >
+            {loadingLessonGroup ? (
+              <Skeleton.Input active size="small" block />
+            ) : (
+              <Select options={lessonGroup} />
+            )}
+          </Form.Item>
+          <Form.Item
+            key="active"
+            label="Status aktif"
+            name="active"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukkan Status Aktif!`,
+              },
+            ]}
+          >
+            <Radio.Group>
+              <Radio key="true" value={true}>
+                Ya
+              </Radio>
+              <Radio key="false" value={false}>
+                Tidak
+              </Radio>
+            </Radio.Group>
           </Form.Item>
         </Form>
       </div>
@@ -316,4 +338,4 @@ const ClassroomForm = (props) => {
   )
 }
 
-export default ClassroomForm
+export default LessonForm

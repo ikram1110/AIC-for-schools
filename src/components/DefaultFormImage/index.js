@@ -100,7 +100,7 @@ const DefaultFormImage = (props) => {
                           ? [
                               {
                                 required: true,
-                                message: `Mohon masukan ${item.label}!`,
+                                message: `Mohon masukkan ${item.label}!`,
                               },
                             ]
                           : null
