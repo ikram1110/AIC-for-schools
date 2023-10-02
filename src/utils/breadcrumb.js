@@ -35,7 +35,9 @@ arrAcademic.forEach((item, index) => {
 })
 
 const presenceChild = []
-const presenceIdx = navRoute.findIndex((x) => x.label === 'Absensi')
+const presenceIdx = navRoute.findIndex(
+  (x) => x.label === 'Absensi dan Penilaian'
+)
 const arrPresence = navRoute[presenceIdx].children
 
 arrPresence.forEach((item, index) => {
@@ -311,6 +313,16 @@ const breadCrumbItem = [
       crumbChevron('Absensi'),
       {
         title: 'Absensi Pegawai',
+      },
+    ],
+  },
+  {
+    route: '/penilaian/siswa',
+    items: [
+      crumbDash,
+      crumbChevron('Absensi'),
+      {
+        title: 'Nilai Siswa',
       },
     ],
   },

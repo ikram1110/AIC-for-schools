@@ -10,8 +10,8 @@ const getAllLesson = async () => {
         ...rest,
         nameUnit: unit.name ?? '',
         nameCurriculum: curriculum.name ?? '',
-        nameDepartment: department.name ?? '',
-        nameEmployee: employee.name ?? '',
+        nameDepartment: department?.name ?? '',
+        nameEmployee: employee?.name ?? '',
         nameLessonGroup: lessonGroup?.name ?? '',
       }
     })

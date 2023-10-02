@@ -230,21 +230,21 @@ const Student = () => {
             scroll={{ y: vh - 340 }}
           />
         </Card>
-      ) : mode === 'Edit' ? (
-        <StudentForm
-          mode={mode}
-          setMode={setMode}
-          getData={getData}
-          itemEdit={itemEdit}
-          notify={notify}
-        />
-      ) : (
+      ) : mode === 'EditParent' ? (
         <StudentParentForm
           mode={mode}
           setMode={setMode}
           getData={getData}
           itemEdit={itemParentEdit}
           idStudent={idEdit}
+          notify={notify}
+        />
+      ) : (
+        <StudentForm
+          mode={mode}
+          setMode={setMode}
+          getData={getData}
+          itemEdit={itemEdit}
           notify={notify}
         />
       )}

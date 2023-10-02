@@ -313,26 +313,30 @@ const StudentForm = (props) => {
                   <Select options={unit} onChange={(id) => unitOnChange(id)} />
                 )}
               </Form.Item>
-              <Form.Item
-                key="idDepartment"
-                label="Jurusan"
-                name="idDepartment"
-                rules={[
-                  {
-                    required: true,
-                    message: `Mohon masukkan Jurusan!`,
-                  },
-                ]}
-              >
-                {loadingDepartment ? (
-                  <Skeleton.Input active size="small" block />
-                ) : (
-                  <Select
-                    options={department}
-                    onChange={(id) => departmentOnChange(id)}
-                  />
-                )}
-              </Form.Item>
+              {department.length > 0 ? (
+                <Form.Item
+                  key="idDepartment"
+                  label="Jurusan"
+                  name="idDepartment"
+                  rules={[
+                    {
+                      required: true,
+                      message: `Mohon masukkan Jurusan!`,
+                    },
+                  ]}
+                >
+                  {loadingDepartment ? (
+                    <Skeleton.Input active size="small" block />
+                  ) : (
+                    <Select
+                      options={department}
+                      onChange={(id) => departmentOnChange(id)}
+                    />
+                  )}
+                </Form.Item>
+              ) : (
+                <></>
+              )}
               <Form.Item
                 key="idClassroom"
                 label="Kelas"

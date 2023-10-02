@@ -154,7 +154,7 @@ const navRoute = [
   },
   {
     icon: <i className="ri-list-check-3"></i>,
-    label: 'Absensi',
+    label: 'Absensi dan Penilaian',
     href: null,
     children: [
       {
@@ -169,6 +169,13 @@ const navRoute = [
         label: 'Absensi Pegawai',
         title: 'Absensi Pegawai',
         href: '/absensi/pegawai',
+        children: null,
+      },
+      {
+        icon: null,
+        label: 'Penilaian Siswa',
+        title: 'Penilaian Siswa',
+        href: '/penilaian/siswa',
         children: null,
       },
     ],

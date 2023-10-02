@@ -9,9 +9,9 @@ const getAllClassroom = async () => {
         ...rest,
         nameUnit: unit.name,
         nameEmployee: employee.name,
-        nameDepartment: department.name,
-        nameBuilding: building.name,
-        nameRoom: room.name,
+        nameDepartment: department?.name,
+        nameBuilding: building?.name,
+        nameRoom: room?.name,
       }
     })
     return response
@@ -29,9 +29,9 @@ const getAllClassroomByUnit = async (idUnit) => {
         ...rest,
         nameUnit: unit.name,
         nameEmployee: employee.name,
-        nameDepartment: department.name,
-        nameBuilding: building.name,
-        nameRoom: room.name,
+        nameDepartment: department?.name,
+        nameBuilding: building?.name,
+        nameRoom: room?.name,
       }
     })
     const newResponse = response.filter((x) => x.idUnit.includes(idUnit))

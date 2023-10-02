@@ -159,8 +159,7 @@ const inventoryFields = [
     label: 'No. HP',
     name: 'phone',
     require: false,
-    type: 'number',
-    numberControl: false,
+    type: 'input',
   },
   {
     label: 'Email',

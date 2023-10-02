@@ -30,6 +30,7 @@ const LessonForm = (props) => {
   const [department, setDepartment] = useState([])
   const [employee, setEmployee] = useState([])
   const [lessonGroup, setLessonGroup] = useState([])
+  const [defaultCurriculum, setDefaultCurriculum] = useState(null)
 
   const [form] = Form.useForm()
 
@@ -117,9 +118,10 @@ const LessonForm = (props) => {
     const resCurriculum = await getAllCurriculum()
     const curriculumItems = []
     resCurriculum.forEach((item) => {
+      if (item.active === true) setDefaultCurriculum(item.id)
       curriculumItems.push({
         value: item.id,
-        label: item.name,
+        label: item.active === true ? item.name + ' - Aktif' : item.name,
       })
     })
     setCurriculum(curriculumItems)
@@ -163,6 +165,13 @@ const LessonForm = (props) => {
     getInitialForm()
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    form.setFieldsValue({
+      idCurriculum: defaultCurriculum,
+    })
+    // eslint-disable-next-line
+  }, [defaultCurriculum])
 
   return (
     <Card
@@ -229,29 +238,53 @@ const LessonForm = (props) => {
               <Select options={curriculum} />
             )}
           </Form.Item>
-          <Form.Item key="code" label="Kode Mata Pelajaran" name="code">
-            <Input />
-          </Form.Item>
-          <Form.Item key="name" label="Nama Mata Pelajaran" name="name">
-            <Input />
-          </Form.Item>
           <Form.Item
-            key="idDepartment"
-            label="Jurusan"
-            name="idDepartment"
+            key="code"
+            label="Kode Mata Pelajaran"
+            name="code"
             rules={[
               {
                 required: true,
-                message: `Mohon masukkan Jurusan!`,
+                message: `Mohon masukkan Nama Kode Mata Pelajaran!`,
               },
             ]}
           >
-            {loadingDepartment ? (
-              <Skeleton.Input active size="small" block />
-            ) : (
-              <Select options={department} />
-            )}
+            <Input />
           </Form.Item>
+          <Form.Item
+            key="name"
+            label="Nama Mata Pelajaran"
+            name="name"
+            rules={[
+              {
+                required: true,
+                message: `Mohon masukkan Nama Mata Pelajaran!`,
+              },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {department.length > 0 ? (
+            <Form.Item
+              key="idDepartment"
+              label="Jurusan"
+              name="idDepartment"
+              rules={[
+                {
+                  required: true,
+                  message: `Mohon masukkan Jurusan!`,
+                },
+              ]}
+            >
+              {loadingDepartment ? (
+                <Skeleton.Input active size="small" block />
+              ) : (
+                <Select options={department} />
+              )}
+            </Form.Item>
+          ) : (
+            <></>
+          )}
           <Form.Item
             key="idEmployee"
             label="Guru Pengampu"

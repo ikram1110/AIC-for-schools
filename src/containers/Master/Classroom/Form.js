@@ -243,23 +243,27 @@ const ClassroomForm = (props) => {
               <Select options={employee} />
             )}
           </Form.Item>
-          <Form.Item
-            key="idDepartment"
-            label="Jurusan"
-            name="idDepartment"
-            rules={[
-              {
-                required: true,
-                message: `Mohon masukkan Jurusan!`,
-              },
-            ]}
-          >
-            {loadingDepartment ? (
-              <Skeleton.Input active size="small" block />
-            ) : (
-              <Select options={department} />
-            )}
-          </Form.Item>
+          {department.length > 0 ? (
+            <Form.Item
+              key="idDepartment"
+              label="Jurusan"
+              name="idDepartment"
+              rules={[
+                {
+                  required: true,
+                  message: `Mohon masukkan Jurusan!`,
+                },
+              ]}
+            >
+              {loadingDepartment ? (
+                <Skeleton.Input active size="small" block />
+              ) : (
+                <Select options={department} />
+              )}
+            </Form.Item>
+          ) : (
+            <></>
+          )}
           <Form.Item
             key="idBuilding"
             label="Gedung"

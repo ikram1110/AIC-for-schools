@@ -49,6 +49,8 @@ const MainRouter = () => {
       <Route path="/akademik/jadwal-pelajaran" element={<LessonSchedule />} />
       <Route path="/akademik/rentang-nilai" element={<ValueRange />} />
 
+      {/* <Route path="/inventaris" element={<Inventory />} /> */}
+
       <Route path="/inventaris" element={<Inventory />} />
     </Routes>
   )

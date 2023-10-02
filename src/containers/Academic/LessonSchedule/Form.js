@@ -37,6 +37,7 @@ const LessonScheduleForm = (props) => {
   const [lesson, setLesson] = useState([])
   const [room, setRoom] = useState([])
   const [employee, setEmployee] = useState([])
+  const [defaultAcademicYear, setDefaultAcademicYear] = useState(null)
 
   const [form] = Form.useForm()
 
@@ -46,8 +47,10 @@ const LessonScheduleForm = (props) => {
   )
 
   const onFinish = (values) => {
-    values.startTime = values.scheduleTime[0].format('HH:mm')
-    values.endTime = values.scheduleTime[1].format('HH:mm')
+    if (values.scheduleTime !== undefined) {
+      values.startTime = values.scheduleTime[0].format('HH:mm')
+      values.endTime = values.scheduleTime[1].format('HH:mm')
+    }
     form
       .validateFields()
       .then(async () => {
@@ -85,10 +88,13 @@ const LessonScheduleForm = (props) => {
       idEmployee: itemEdit.idEmployee,
       parallelSchedule: itemEdit.parallelSchedule,
       serialSchedule: itemEdit.serialSchedule,
-      scheduleTime: [
-        moment(itemEdit.startTime, 'HH:mm'),
-        moment(itemEdit.endTime, 'HH:mm'),
-      ],
+      scheduleTime:
+        itemEdit.startTime === null
+          ? null
+          : [
+              moment(itemEdit.startTime, 'HH:mm'),
+              moment(itemEdit.endTime, 'HH:mm'),
+            ],
       day: itemEdit.day,
       active: itemEdit.active,
     })
@@ -131,9 +137,13 @@ const LessonScheduleForm = (props) => {
     const resAcademicYear = await getAllAcademicYear()
     const academicYearItems = []
     resAcademicYear.forEach((item) => {
+      if (item.active === true) setDefaultAcademicYear(item.id)
       academicYearItems.push({
         value: item.id,
-        label: item.code + ' - ' + item.name,
+        label:
+          item.active === true
+            ? item.code + ' - ' + item.name + ' - Aktif'
+            : item.code + ' - ' + item.name,
       })
     })
     setAcademicYear(academicYearItems)
@@ -155,7 +165,7 @@ const LessonScheduleForm = (props) => {
     resClassroom.forEach((item) => {
       classroomItems.push({
         value: item.id,
-        label: item.code + ' - ' + item.name,
+        label: item.name,
       })
     })
     setClassroom(classroomItems)
@@ -188,6 +198,13 @@ const LessonScheduleForm = (props) => {
     getInitialForm()
     // eslint-disable-next-line
   }, [])
+
+  useEffect(() => {
+    form.setFieldsValue({
+      idAcademicYear: defaultAcademicYear,
+    })
+    // eslint-disable-next-line
+  }, [defaultAcademicYear])
 
   const days = [
     {

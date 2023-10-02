@@ -1,23 +1,15 @@
-import {
-  Button,
-  Card,
-  Input,
-  Modal,
-  Select,
-  Space,
-  Table,
-  notification,
-} from 'antd'
+import { Button, Card, Input, Modal, Select, Table, notification } from 'antd'
 import { useEffect, useState } from 'react'
-import LessonScheduleForm from './Form'
+import StudentPresenceForm from './Form'
 import {
-  deleteLessonSchedule,
-  getAllLessonSchedule,
-} from 'src/services/lessonschedule'
+  deleteStudentPresence,
+  getAllStudentPresence,
+} from 'src/services/studentPresence'
+import makeColumns from 'src/utils/column'
+import fields from './fields'
 import { getAllUnit } from 'src/services/unit'
-import moment from 'moment'
 
-const LessonSchedule = () => {
+const StudentPresence = () => {
   const [mode, setMode] = useState('Data')
   const [itemEdit, setItemEdit] = useState({})
   const [loading, setLoading] = useState(false)
@@ -82,71 +74,14 @@ const LessonSchedule = () => {
       },
       async onOk() {
         setLoadingDel(true)
-        await deleteLessonSchedule(id)
+        await deleteStudentPresence(id)
         getData()
         setLoadingDel(false)
       },
     })
   }
 
-  const columns = [
-    {
-      title: 'Nama Mata Pelajaran',
-      dataIndex: 'nameLesson',
-      key: 'nameLesson',
-      fixed: 'left',
-    },
-    {
-      title: 'Kelas',
-      dataIndex: 'nameClassroom',
-      key: 'nameClassroom',
-    },
-    {
-      title: 'Guru',
-      dataIndex: 'nameEmployee',
-      key: 'nameEmployee',
-    },
-    {
-      title: 'Hari',
-      dataIndex: 'day',
-      key: 'day',
-    },
-    {
-      title: 'Jam Pelajaran',
-      dataIndex: 'startTime',
-      key: 'startTime',
-      render: (_, { startTime, endTime }) =>
-        moment(startTime, 'HH:mm:ss').format('HH:mm') +
-        ' - ' +
-        moment(endTime, 'HH:mm:ss').format('HH:mm'),
-    },
-    {
-      title: 'Ruangan',
-      dataIndex: 'nameRoom',
-      key: 'nameRoom',
-    },
-    {
-      title: 'Aksi',
-      key: 'action',
-      width: 130,
-      fixed: 'right',
-      render: (_, { id }) => (
-        <Space size="small">
-          <Button
-            type="primary"
-            icon={<i className="ri-edit-2-line"></i>}
-            onClick={() => onEdit(id)}
-          />
-          <Button
-            type="primary"
-            danger
-            icon={<i className="ri-delete-bin-6-line"></i>}
-            onClick={() => onDelete(id)}
-          />
-        </Space>
-      ),
-    },
-  ]
+  const columns = makeColumns(fields, onEdit, onDelete)
 
   useEffect(() => {
     getData()
@@ -154,7 +89,7 @@ const LessonSchedule = () => {
 
   const getData = async () => {
     setLoading(true)
-    const response = await getAllLessonSchedule()
+    const response = await getAllStudentPresence()
     setSource(response)
     const resUnit = await getAllUnit()
     const unitItems = []
@@ -174,7 +109,7 @@ const LessonSchedule = () => {
       {contextHolderNotify}
       {mode === 'Data' ? (
         <Card
-          title="Data Jadwal Pelajaran"
+          title="Data Ruang Kelas"
           extra={
             <div className="action-card">
               <Input
@@ -211,7 +146,7 @@ const LessonSchedule = () => {
           />
         </Card>
       ) : (
-        <LessonScheduleForm
+        <StudentPresenceForm
           mode={mode}
           setMode={setMode}
           getData={getData}
@@ -223,4 +158,4 @@ const LessonSchedule = () => {
   )
 }
 
-export default LessonSchedule
+export default StudentPresence
