@@ -109,7 +109,7 @@ const Building = () => {
               showSizeChanger: true,
             }}
             loading={loading}
-            scroll={{ y: vh - 340 }}
+            scroll={{ y: vh - 340, x: 1120 }}
           />
         </Card>
       ) : (

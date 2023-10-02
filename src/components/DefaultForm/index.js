@@ -7,7 +7,7 @@ const DefaultForm = (props) => {
     <Form
       form={form}
       labelCol={{
-        span: 4,
+        span: 5,
       }}
       layout="horizontal"
       onFinish={onFinish}

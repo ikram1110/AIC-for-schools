@@ -10,6 +10,8 @@ const makeColumns = (fields, onEdit, onDelete, rightAction = false) => {
         key: item.name,
         render: item.render,
         fixed: item.fixed ?? null,
+        width: item.width ?? null,
+        align: item.align ?? null,
       })
   })
   columns.push({
